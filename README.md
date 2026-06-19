@@ -19,13 +19,21 @@ The model takes a grayscale image as input and outputs a probability distributio
 
 ## Training Strategy
 Loss Function: nn.CTCLoss with blank=0 and zero_infinity=True.
+
 Optimizer: Adam optimizer with an initial learning rate of 0.0005.
+
 Learning Rate Scheduler: ReduceLROnPlateau (factor=0.5, patience=3) that reduces learning rate when validation loss plateaus.
+
 Gradient Clipping: Applied with max_norm=5.0 to stabilize training.
+
 Data Preprocessing: All images were resized to 256×64 pixels and normalized using mean and standard deviation of 0.5.
+
 Data Split: 90% of the data was used for training and 10% was held out as a validation set.
+
 Training Duration: The model was trained for 50 epochs with a batch size of 64.
+
 Device: Training was performed on CPU due to MPS (Apple Silicon) incompatibility with CTCLoss.
+
 Model Checkpointing: The model with the lowest validation Character Error Rate (CER) was saved as crnn_model_best.pth.
 
 ## Results
